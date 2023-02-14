@@ -73,7 +73,7 @@ class Reviews(models.Model):  # отзыв
         return self.product.title_product
 
 
-class UserHistory(models.Model):
+class UserHistory(models.Model):  # история заказов пользователя
     user_history = models.ForeignKey('UserProfile', on_delete=models.CASCADE, verbose_name='пользователь', null=True)
     product_history = models.ForeignKey('Product', on_delete=models.CASCADE, verbose_name='продукт', null=True)
     payment_date = models.DateField(auto_now_add=True)
