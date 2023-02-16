@@ -34,6 +34,9 @@ class UserProfile(models.Model):  # профиль пользователя
 class CategoryProduct(models.Model):  # категория товаров
     title_category = models.TextField(max_length=50, verbose_name='название категории')
 
+    def __str__(self):
+        return self.title_category
+
 
 class Product(models.Model):  # товар
     title_product = models.TextField(max_length=50, verbose_name='название товара')
@@ -55,7 +58,7 @@ class Basket(models.Model):  # корзина пользователя
     create_at = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return self.username.name
+        return self.username.email
 
 
 class Enrollment(models.Model):  # промежуточная таблица корзины
@@ -80,3 +83,6 @@ class UserHistory(models.Model):  # история заказов пользов
     payment_method = models.TextField(max_length=30, default='не указан', verbose_name='способ оплаты заказа')
     payment_delivery = models.TextField(max_length=50, default='не указан', verbose_name='способ доставки заказа')
     mistake_text = models.TextField(default='None', max_length=100, verbose_name='текст ошибки оплаты')
+
+    def __str__(self):
+        return self.user_history.email
