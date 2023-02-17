@@ -45,7 +45,7 @@ class CategoryProduct(models.Model):  # категория товаров
 
 
 class Product(models.Model):  # товар
-    category = models.ForeignKey('CategoryProduct', on_delete=models.CASCADE, verbose_name='товар')
+    category = models.ForeignKey('CategoryProduct', on_delete=models.CASCADE, verbose_name='категория товара')
     specifications = models.ForeignKey('Specifications', on_delete=models.CASCADE, verbose_name='спецификация товара')
     price = models.IntegerField(default=0, verbose_name='цена товара')
     count = models.IntegerField(default=0, verbose_name='количество ')
