@@ -3,33 +3,61 @@ from .models import *
 
 
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ['user', 'name', 'patronymic', 'surname', 'phone', 'email', 'profile_picture']
+    list_display = ['user', 'phone', 'full_name', 'avatar']
+    search_fields = ['full_name']
 
 
 class CategoryProductAdmin(admin.ModelAdmin):
-    list_display = ['title_category']
+    list_display = ['title_category', 'category_image']
     search_fields = ['title_category']
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['title_product', 'description', 'count', 'price', 'category', 'limited_edition', 'product_picture']
+    list_display = ['category', 'specifications', 'price', 'count', 'date',
+                    'title_product', 'description', 'rating', 'reviews']
     search_fields = ['title_product']
 
 
-class BasketAdmin(admin.ModelAdmin):
-    list_display = ['username', 'product']
-    search_fields = ['username']
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ['product', 'picture']
+    search_fields = ['product']
+
+
+class TagsAdmin(admin.ModelAdmin):
+    list_display = ['product', 'tags_name']
+    search_fields = ['tags_name']
 
 
 class ReviewsAdmin(admin.ModelAdmin):
-    list_display = ['text', 'product', 'user_name', 'create_at']
-    search_fields = ['user_name']
+    list_display = ['text', 'product', 'author', 'create_at']
+    search_fields = ['author']
 
 
-class UserHistoryAdmin(admin.ModelAdmin):
-    list_display = ['user_history', 'product_history', 'payment_date',
-                    'payment_method', 'payment_delivery', 'mistake_text']
-    search_fields = ['user_history']
+class SpecificationsAdmin(admin.ModelAdmin):
+    list_display = ['name', 'value']
+    search_fields = ['name']
+
+
+class OrderHistoryAdmin(admin.ModelAdmin):
+    list_display = ['user_order', 'product_order', 'payment_date',
+                    'delivery_type', 'payment_type', 'total_cost', 'status', 'city', 'address']
+    search_fields = ['user_order']
+
+
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ['product_order', 'count', 'price',
+                    'date', 'free_delivery']
+    search_fields = ['product_order']
+
+
+class BasketAdmin(admin.ModelAdmin):
+    list_display = ['username', 'create_at']
+    search_fields = ['username']
+
+
+class PaymentAdmin(admin.ModelAdmin):
+    list_display = ['number', 'name', 'month', 'year', 'code']
+    search_fields = ['number']
 
 
 admin.site.register(UserProfile, UserProfileAdmin)
@@ -37,4 +65,9 @@ admin.site.register(CategoryProduct, CategoryProductAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Basket, BasketAdmin)
 admin.site.register(Reviews, ReviewsAdmin)
-admin.site.register(UserHistory, UserHistoryAdmin)
+admin.site.register(FilesImage, ImageAdmin)
+admin.site.register(TagsFile, TagsAdmin)
+admin.site.register(Specifications, SpecificationsAdmin)
+admin.site.register(OrderHistory, OrderHistoryAdmin)
+admin.site.register(Order, OrderAdmin)
+admin.site.register(Payment, PaymentAdmin)
