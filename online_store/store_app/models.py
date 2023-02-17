@@ -27,6 +27,10 @@ class UserProfile(models.Model):  # профиль пользователя
         if created and instance.is_superuser:
             UserProfile.objects.create(user=instance)
 
+    class Meta:
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
+
     def __str__(self):
         return self.email
 
@@ -34,8 +38,9 @@ class UserProfile(models.Model):  # профиль пользователя
 class CategoryProduct(models.Model):  # категория товаров
     title_category = models.TextField(max_length=50, verbose_name='название категории')
 
-    def __str__(self):
-        return self.title_category
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
 
 
 class Product(models.Model):  # товар
@@ -46,7 +51,11 @@ class Product(models.Model):  # товар
     category = models.ForeignKey('CategoryProduct', on_delete=models.CASCADE, verbose_name='товар')
     limited_edition = models.BooleanField(default=False)
     popular_product_count = models.IntegerField(default=0, verbose_name='счетчик покупок данного товара')
-    product_picture = models.ImageField(upload_to='files/', null=True, validators=[validate_image])
+    product_picture = models.ImageField(upload_to='files/', null=True)
+
+    class Meta:
+        verbose_name = 'Товар'
+        verbose_name_plural = 'Товары'
 
     def __str__(self):
         return self.title_product
@@ -57,8 +66,12 @@ class Basket(models.Model):  # корзина пользователя
     product = models.ManyToManyField('Product', related_name='product', through='Enrollment')
     create_at = models.DateField(auto_now_add=True)
 
+    class Meta:
+        verbose_name = 'Корзина'
+        verbose_name_plural = 'Корзины'
+
     def __str__(self):
-        return self.username.email
+        return self.username.name
 
 
 class Enrollment(models.Model):  # промежуточная таблица корзины
@@ -72,6 +85,10 @@ class Reviews(models.Model):  # отзыв
     user_name = models.ForeignKey('UserProfile', on_delete=models.CASCADE, verbose_name='пользователь')
     create_at = models.DateField(auto_now_add=True)
 
+    class Meta:
+        verbose_name = 'Отзыв'
+        verbose_name_plural = 'Отзывы'
+
     def __str__(self):
         return self.product.title_product
 
@@ -84,5 +101,9 @@ class UserHistory(models.Model):  # история заказов пользов
     payment_delivery = models.TextField(max_length=50, default='не указан', verbose_name='способ доставки заказа')
     mistake_text = models.TextField(default='None', max_length=100, verbose_name='текст ошибки оплаты')
 
+    class Meta:
+        verbose_name = 'История покупок'
+        verbose_name_plural = 'Истории покупок'
+
     def __str__(self):
-        return self.user_history.email
+        return self.user_history

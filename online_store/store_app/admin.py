@@ -8,23 +8,28 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 class CategoryProductAdmin(admin.ModelAdmin):
     list_display = ['title_category']
+    search_fields = ['title_category']
 
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['title_product', 'description', 'count', 'price', 'category', 'limited_edition', 'product_picture']
+    search_fields = ['title_product']
 
 
 class BasketAdmin(admin.ModelAdmin):
     list_display = ['username', 'product']
+    search_fields = ['username']
 
 
 class ReviewsAdmin(admin.ModelAdmin):
     list_display = ['text', 'product', 'user_name', 'create_at']
+    search_fields = ['user_name']
 
 
 class UserHistoryAdmin(admin.ModelAdmin):
     list_display = ['user_history', 'product_history', 'payment_date',
                     'payment_method', 'payment_delivery', 'mistake_text']
+    search_fields = ['user_history']
 
 
 admin.site.register(UserProfile, UserProfileAdmin)

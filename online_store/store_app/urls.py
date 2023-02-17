@@ -1,19 +1,20 @@
 from django.urls import path, include
-from .views import *
+from store_app.views import AllProductCatalogView, ProductView, AuthorLogoutView, AuthorLoginView
 
 urlpatterns = [
-    path('', StartView.as_view(), name='start'),
-
+    path('', AboutShopView.as_view(), name='about'),  # страница с информацией о магазине
+    
     path('logout/', AuthorLogoutView.as_view(), name='logout'),  # страница входа пользователя
     path('register/', RegisterView.as_view(), name='register'),  # страница регистрации
     path('login/', AuthorLoginView.as_view(), name='login'),  # страница выхода из учетной записи
 
-    path('about/', AboutShopView.as_view(), name='about'),  # страница с информацией о магазине
     path('account/', UserOfficeView.as_view(), name='account'),  # личный кабинет пользователя
     path('cart/', UserCartView.as_view(), name='cart'),  # корзина пользователя
     path('catalog/', AllProductCatalogView.as_view(), name='catalog'),  # каталог товаров с фильтром и сортировкой
     path('history_order/', UserHistoryOrderView.as_view(), name='history_order'),  # история заказов пользователя
-    path('index/', IndexView.as_view(), name='index'),  # страница с популярными товарами
+    path('index/', IndexView.as_view(), name='index'),
+    # страница c просмотренными ,популярными товарами и ограниченными продажами
+
     path('one_order/', OneOrderView.as_view(), name='one_order'),  # страница  заказа
     path('order/', OrderView.as_view(), name='order'),  # страница оформления заказа
     path('payment/', PaymentView.as_view(), name='payment'),  # страница оплаты(ввода карты) заказа
