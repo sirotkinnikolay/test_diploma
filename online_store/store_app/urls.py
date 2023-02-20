@@ -24,6 +24,8 @@ urlpatterns = [
 ]
 
 api_urlpatterns = [
-    path("categories/", One.as_view())
+    path("categories/", One.as_view()),
+    path("products/popular/", Two.as_view()),
+
 
 ]

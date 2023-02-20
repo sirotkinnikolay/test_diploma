@@ -18,7 +18,7 @@ import string
 import json
 from rest_framework.views import APIView
 from rest_framework.generics import ListCreateAPIView, ListAPIView
-from store_app.serializers import CategoryProductSerializer
+from store_app.serializers import CategoryProductSerializer, ProductSerializer
 from rest_framework.response import Response
 
 
@@ -131,5 +131,11 @@ class One(APIView):
     def get(self, request):
         item = CategoryProduct.objects.all()
         serializer = CategoryProductSerializer(item, many=True)
-        print(serializer.data)
+        return Response(serializer.data)
+
+
+class Two(APIView):
+    def get(self, request):
+        item = Product.objects.all()
+        serializer = ProductSerializer(item, many=True)
         return Response(serializer.data)

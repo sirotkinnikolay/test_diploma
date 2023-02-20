@@ -14,8 +14,8 @@ class CategoryProductAdmin(admin.ModelAdmin):
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['category', 'specifications', 'price', 'count', 'date',
-                    'title_product', 'description', 'rating', 'reviews']
-    search_fields = ['title_product']
+                    'title', 'description', 'rating', 'reviews']
+    search_fields = ['title']
 
 
 class ImageAdmin(admin.ModelAdmin):

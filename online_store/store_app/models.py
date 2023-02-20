@@ -50,7 +50,7 @@ class Product(models.Model):  # товар
     price = models.IntegerField(default=0, verbose_name='цена товара')
     count = models.IntegerField(default=0, verbose_name='количество ')
     date = models.DateField(auto_now_add=True)
-    title_product = models.TextField(max_length=50, verbose_name='название товара')
+    title = models.TextField(max_length=50, verbose_name='название товара')
     description = models.TextField(max_length=100, verbose_name='описание товара')
     free_delivery = models.BooleanField(default=True)
     product_picture = models.ImageField(upload_to='files/', null=True)
@@ -62,7 +62,7 @@ class Product(models.Model):  # товар
         verbose_name_plural = 'Товары'
 
     def __str__(self):
-        return self.title_product
+        return self.title
 
 
 class FilesImage(models.Model):
