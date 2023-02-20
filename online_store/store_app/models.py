@@ -33,15 +33,15 @@ class UserProfile(models.Model):  # профиль пользователя
 
 
 class CategoryProduct(models.Model):  # категория товаров
-    title_category = models.TextField(max_length=50, verbose_name='название категории')
-    category_image = models.ImageField(upload_to='files/', null=True)
+    title = models.TextField(max_length=50, verbose_name='название категории')
+    image = models.ImageField(upload_to='files/', null=True)
 
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
 
     def __str__(self):
-        return self.title_category
+        return self.title
 
 
 class Product(models.Model):  # товар

@@ -1,6 +1,6 @@
 from django.urls import path
 from store_app.views import *
-
+from rest_framework import routers
 
 urlpatterns = [
     path('logout/', AuthorLogoutView.as_view(), name='logout'),  # страница входа пользователя
@@ -21,4 +21,9 @@ urlpatterns = [
     path('profile/', ProfileEditView.as_view(), name='profile'),  # profile.html
     path('progress-payment/', ProgressPaymentView.as_view(), name='progress_payment'),  # progressPayment.html
     path('sale/', SaleView.as_view(), name='sale'),  # sale.html
+]
+
+api_urlpatterns = [
+    path("categories/", One.as_view())
+
 ]

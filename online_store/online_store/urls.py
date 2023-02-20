@@ -16,8 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import path, include
+from store_app.urls import urlpatterns as site_urlpatterns, api_urlpatterns
+from rest_framework import routers
+from store_app.api import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('store_app.urls')),
+    path('', include(site_urlpatterns)),
+    path('api/', include(api_urlpatterns)),
 ]

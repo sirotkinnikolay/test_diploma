@@ -8,8 +8,8 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 
 class CategoryProductAdmin(admin.ModelAdmin):
-    list_display = ['title_category', 'category_image']
-    search_fields = ['title_category']
+    list_display = ['title', 'image']
+    search_fields = ['title']
 
 
 class ProductAdmin(admin.ModelAdmin):
