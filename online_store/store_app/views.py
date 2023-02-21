@@ -1,3 +1,5 @@
+import os
+
 from django.shortcuts import render
 from store_app.models import Product, CategoryProduct
 from django.views import View
@@ -18,9 +20,11 @@ import string
 import json
 from rest_framework.views import APIView
 from rest_framework.generics import ListCreateAPIView, ListAPIView
-from store_app.serializers import CategoryProductSerializer, ProductSerializer
 from rest_framework.response import Response
-
+from django.http import JsonResponse
+from rest_framework import renderers, serializers
+import json
+from django.core.serializers.json import DjangoJSONEncoder
 
 class AuthorLogoutView(LogoutView):
     """Выход из учетной записи пользователя"""
@@ -134,8 +138,23 @@ class One(APIView):
         return Response(serializer.data)
 
 
-class Two(APIView):
+class CategoryProductView(View):
     def get(self, request):
-        item = Product.objects.all()
-        serializer = ProductSerializer(item, many=True)
-        return Response(serializer.data)
+        categories = CategoryProduct.objects.all()
+        categories_serialized_data = []
+
+        for category in categories:
+            categories_serialized_data.append({
+                'id': str(category.id),
+                'title': category.title,
+                'image': {"src": str(category.image), "alt": os.path.basename(category.image.name)},
+                'href': '/catalog/' + str(category.id),
+                'subcategories': [{'id': str(category.id),
+                                   'title': category.title,
+                                   'image': {"src": str(category.image), "alt": os.path.basename(category.image.name)},
+                                   'href': '/catalog/' + str(category.id), }]
+            })
+
+        return JsonResponse(categories_serialized_data, safe=False)
+
+

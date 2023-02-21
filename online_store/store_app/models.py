@@ -34,7 +34,7 @@ class UserProfile(models.Model):  # профиль пользователя
 
 class CategoryProduct(models.Model):  # категория товаров
     title = models.TextField(max_length=50, verbose_name='название категории')
-    image = models.ImageField(upload_to='files/', null=True)
+    image = models.FileField(upload_to='files/', null=True)
 
     class Meta:
         verbose_name = 'Категория'
