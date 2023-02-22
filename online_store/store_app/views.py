@@ -158,3 +158,20 @@ class CategoryProductView(View):
         return JsonResponse(categories_serialized_data, safe=False)
 
 
+def category_list(request):
+    categories = CategoryProduct.objects.all()
+    category_for_sale = []
+
+    if request.method == 'GET':
+        for category in categories:
+            sub = {'id': str(category.id), 'title': category.title, 'image': {'src': category.image.name,
+                                                                         'alt': os.path.basename(category.image.name)},
+                   'href': '/catalog/' + str(category.id)}
+            category_for_sale.append(Category(id=str(category.id),
+                                              title=category.title,
+                                              image={'src': category.image.name,
+                                                     'alt': os.path.basename(category.image.name)},
+                                              href='/catalog/' + str(category.id),
+                                              subcategories=[sub]))
+
+        return JsonResponse(CategorySerializer(category_for_sale, many=True).data, safe=False)

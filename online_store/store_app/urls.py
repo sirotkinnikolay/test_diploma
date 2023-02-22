@@ -24,7 +24,7 @@ urlpatterns = [
 ]
 
 api_urlpatterns = [
-    path("categories/", CategoryProductView.as_view()),
+    path("categories/", category_list, name='category_list'),
     # path("test/", CategoryProductView.as_view()),
 
 
